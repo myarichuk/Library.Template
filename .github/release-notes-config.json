@@ -19,34 +19,24 @@
       "title": "## \ud83e\uddea Tests"
     },
     {
-      "labels":[
+      "labels": [
         "refactoring",
         "refactor"
       ],
-      "title": "## 🔃 Refactoring"
+      "title": "## \ud83d\udd03 Refactoring"
     },
     {
-      "labels":[
+      "labels": [
         "breaking",
         "break"
       ],
-      "title": "## 🙀 Breaking"
-    },    
-    {
-        "title": "## 📦 Dependencies",
-        "labels": ["dependencies"]
+      "title": "## \ud83d\ude40 Breaking"
     },
     {
-      "empty_content": "- no matching PRs",
-      "exclude_labels": [
-        "no-magic"
-      ],
-      "exhaustive": true,
       "labels": [
-        "test",
-        "magic"
+        "dependencies"
       ],
-      "title": "## \ud83e\uddea Tests and some \ud83e\ude84 Magic"
+      "title": "## \ud83d\udce6 Dependencies"
     }
   ],
   "duplicate_filter": {
@@ -91,7 +81,7 @@
   "template": "${{CHANGELOG}}\n\n<details>\n<summary>Uncategorized</summary>\n\n${{UNCATEGORIZED}}\n</details>",
   "transformers": [
     {
-      "pattern": "[\\-\\*] (\\[(...|TEST|CI|SKIP)\\])( )?(.+?)\n(.+?[\\-\\*] )(.+)",
+      "pattern": "[\\-\\*] (\\[(...|TEST|CI|SKIP|REFACTORING)\\])( )?(.+?)\n(.+?[\\-\\*] )(.+)",
       "target": "- $4\n  - $6"
     }
   ]
