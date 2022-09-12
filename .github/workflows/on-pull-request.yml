@@ -6,14 +6,6 @@ on:
     branches: [ "main" ]
 
 jobs:
-  label:
-    name: PR Label
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set Label(s)
-        uses: bcoe/conventional-release-labels@v1
-        with:
-          type_labels: '{"feat": "feature", "dep": "dependencies", "depend": "dependencies", "dependency":"dependencies", "dependencies":"dependencies", "feature": "feature", "fix": "fix", "fixes": "fix", "breaking": "breaking", "refactoring": "refactoring","refactor": "refactoring"}'
   lint-commits:
     name: Ensure Conventional Commits
     runs-on: ubuntu-latest
