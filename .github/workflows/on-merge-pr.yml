@@ -41,8 +41,8 @@ jobs:
       - name: Pack NuGet
         run: dotnet pack --configuration release -o:package /p:PackageVersion=${{ steps.gitversion.outputs.AssemblySemVer }}
 
-      - name: Push generated package to GitHub registry
-        run: dotnet nuget push ./package/*.nupkg  -s https://api.nuget.org/v3/index.json  --api-key ${{ secrets.NUGET_TOKEN }}
+#      - name: Push generated package to GitHub registry
+#        run: dotnet nuget push ./package/*.nupkg  -s https://api.nuget.org/v3/index.json  --api-key ${{ secrets.NUGET_TOKEN }}
 
       - uses: rickstaa/action-create-tag@v1
         with:
