@@ -102,7 +102,5 @@ jobs:
       - name: Commit CHANGELOG.md
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          branch: main
-          commit_message: 'docs: update CHANGELOG.md for ${{needs.build-and-pack.outputs.tag}} [skip ci]'
+          commit_message: 'docs: update CHANGELOG.md for ${{needs.build-and-pack.outputs.tag}}'
           file_pattern: CHANGELOG.md
-          push_options: '--force'
