@@ -96,9 +96,7 @@ jobs:
           body: ${{ steps.changelog.outputs.changes }}
           token: ${{ github.token }}
           tag: ${{needs.build-and-pack.outputs.tag}}
-          artifacts: |
-            '*.nupkg'
-            '*.snupkg'
+          artifacts: "*.nupkg, *.snupkg"
 
       - name: Commit CHANGELOG.md
         uses: stefanzweifel/git-auto-commit-action@v4
