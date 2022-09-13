@@ -1,4 +1,4 @@
-name: Update Changelog & Release
+name: Changelog & Release
 
 on:
   push:
@@ -8,8 +8,7 @@ env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 
 jobs:
-  changelog:
-    if: github.event.pull_request.merged == true
+  generate:
     runs-on: ubuntu-latest
     steps:
       - name: Update CHANGELOG
