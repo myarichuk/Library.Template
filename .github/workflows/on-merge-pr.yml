@@ -104,3 +104,6 @@ jobs:
           branch: main
           commit_message: 'docs: update CHANGELOG.md for ${{needs.build-and-pack.outputs.tag}} [skip ci]'
           file_pattern: CHANGELOG.md
+          status_options: '--untracked-files=no'
+          push_options: '--force'
+          add_options: '-u'
