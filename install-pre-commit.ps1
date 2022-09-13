@@ -23,6 +23,14 @@ pre-commit install
 if (!(Test-Path '.pre-commit-config.yaml')){
 New-Item .pre-commit-config.yaml
 Set-Content .pre-commit-config.yaml 'repos:
+- repo: local
+  hooks:
+  #Use dotnet format already installed on your machine
+  - id: dotnet-format
+    name: dotnet-format
+    language: system
+    entry: dotnet format --include
+    types_or: ["c#", "vb"]
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.3.0
   hooks:
@@ -34,7 +42,7 @@ Set-Content .pre-commit-config.yaml 'repos:
   - id: trailing-whitespace
     args: [--markdown-linebreak-ext=md]
   - id: pretty-format-json
-    args: [''--autofix'']
+    args: ['--autofix']
 - repo: https://github.com/compilerla/conventional-pre-commit
   rev: v2.0.0
   hooks:
