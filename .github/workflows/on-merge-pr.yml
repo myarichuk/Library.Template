@@ -97,7 +97,7 @@ jobs:
           token: ${{ github.token }}
           tag: ${{needs.build-and-pack.outputs.tag}}
           artifacts: "*.nupkg, *.snupkg"
-
+      - uses: actions/checkout@v3
       - name: Commit CHANGELOG.md
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
