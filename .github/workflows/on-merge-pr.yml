@@ -93,7 +93,7 @@ jobs:
   changelog-release:
     name: Update Changelog & Release
     runs-on: ubuntu-latest
-    needs: [publish-github, publish-nuget]
+    needs: [build-and-pack]
     steps:
       - uses: actions/download-artifact@v3
         with:
