@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   build-and-pack:
-    name: Build & Pack NuPkg
+    name: Build & Pack
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
@@ -39,16 +39,18 @@ jobs:
       - name: Restore
         run: dotnet restore
       - name: Build
-        run: dotnet build --configuration Release /property:CI=true /p:Version=${{ steps.gitversion.outputs.AssemblySemVer }} /p:AssemblyVersion=${{ steps.gitversion.outputs.AssemblySemVer }} /p:FileVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} /p:InformationalVersion=${{ steps.gitversion.outputs.InformationalVersion }} --no-restore /bl:"${{ runner.temp }}/_artifacts/build_logs/build.binlog"
+        run: dotnet build --configuration Release /p:CI=true /p:Version=${{ steps.gitversion.outputs.AssemblySemVer }} /p:AssemblyVersion=${{ steps.gitversion.outputs.AssemblySemVer }} /p:FileVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} /p:InformationalVersion=${{ steps.gitversion.outputs.InformationalVersion }} --no-restore /bl:"${{ runner.temp }}/_artifacts/build_logs/build.binlog"
       - name: Test
         run: dotnet test --configuration Release /p:Version=${{ steps.gitversion.outputs.AssemblySemVer }} /p:AssemblyVersion=${{ steps.gitversion.outputs.AssemblySemVer }} /p:FileVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} --no-build --verbosity normal
       - name: Pack NuGet
-        run: dotnet pack --configuration release -o:package /p:PackageVersion=${{ steps.gitversion.outputs.AssemblySemVer }}
+        run: dotnet pack --configuration release /p:CI=true -o:package /p:AssemblyVersion=${{ steps.gitversion.outputs.AssemblySemVer }} /p:Version=${{ steps.gitversion.outputs.AssemblySemVer }} /p:PackageVersion=${{ steps.gitversion.outputs.AssemblySemVer }}
 
       - uses: actions/upload-artifact@v3
         with:
           name: nupkg
-          path: ./package/*.nupkg
+          path: |
+            ./package/*.nupkg
+            ./package/*.snupkg
       - uses: rickstaa/action-create-tag@v1
         with:
           tag: v${{ steps.gitversion.outputs.AssemblySemVer }}
@@ -68,27 +70,7 @@ jobs:
         with:
           name: nupkg
       - name: Publish to NuGet
-        run: echo 'dotnet nuget push ./*.nupkg  -s https://api.nuget.org/v3/index.json  --api-key ${{ secrets.NUGET_TOKEN }}  '
-#      - name: Publish to NuGet
-#        run: dotnet nuget push ./nupkg/*.nupkg  -s https://api.nuget.org/v3/index.json  --api-key ${{ secrets.NUGET_TOKEN }}
-
-  publish-github:
-    name: Publish (Github Packages)
-    runs-on: ubuntu-latest
-    needs: [build-and-pack]
-    steps:
-      - name: Setup .NET tooling
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: 6.0.x
-      - uses: actions/download-artifact@v3
-        with:
-          name: nupkg
-      - name: Publish to NuGet
-        run: echo 'dotnet nuget push ./*.nupkg  -s https://nuget.pkg.github.com/myarichuk/index.json  --api-key ${{ secrets.GITHUB_NUGET_TOKEN }}  '
-#      - name: Publish to NuGet
-#        run: dotnet nuget push ./*.nupkg  -s https://nuget.pkg.github.com/myarichuk/index.json  --api-key ${{ secrets.GITHUB_NUGET_TOKEN }}
-
+        run: dotnet nuget push ./*.nupkg  -s https://api.nuget.org/v3/index.json  -k ${{ secrets.NUGET_TOKEN }}
 
   changelog-release:
     name: Update Changelog & Release
@@ -114,7 +96,9 @@ jobs:
           body: ${{ steps.changelog.outputs.changes }}
           token: ${{ github.token }}
           tag: ${{needs.build-and-pack.outputs.tag}}
-          artifacts: '*.nupkg'
+          artifacts: |
+            '*.nupkg'
+            '*.snupkg'
 
       - name: Commit CHANGELOG.md
         uses: stefanzweifel/git-auto-commit-action@v4

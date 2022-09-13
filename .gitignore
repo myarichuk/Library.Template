@@ -19,6 +19,7 @@ packages-microsoft-prod.deb
 mono_crash.*
 
 # Build results
+[Pp]ackage/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
