@@ -77,6 +77,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build-and-pack]
     steps:
+      - name: Git Checkout
+        uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with:
           name: nupkg
@@ -97,8 +99,6 @@ jobs:
           token: ${{ github.token }}
           tag: ${{needs.build-and-pack.outputs.tag}}
           artifacts: "*.nupkg, *.snupkg"
-      - name: Git Checkout
-        uses: actions/checkout@v3
       - name: Commit CHANGELOG.md
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
