@@ -110,11 +110,11 @@ jobs:
         with:
           allowUpdates: true
           draft: false
-          name: v${{ steps.gitversion.outputs.AssemblySemVer }}
+          name: Release v${{needs.build-and-pack.outputs.tag}}
           body: ${{ steps.changelog.outputs.changes }}
           token: ${{ github.token }}
           tag: ${{needs.build-and-pack.outputs.tag}}
-          artifacts: ./nukpg
+          artifacts: ./nukpg/*.nupkg
 
       - name: Commit CHANGELOG.md
         uses: stefanzweifel/git-auto-commit-action@v4
