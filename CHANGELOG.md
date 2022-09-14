@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.0.1.0] - 2022-09-13
+### :wrench: Chores
+- [`9262149`](https://github.com/myarichuk/Library.Template/commit/9262149e016f9497ea5a6372e8c79aacd95cf488) - update readme to show how to start working with the template *(commit by [@myarichuk](https://github.com/myarichuk))*
+
+
 ## [v2.0.0.0] - 2022-09-13
 ### :wrench: Chores
 - [`a11ffeb`](https://github.com/myarichuk/Library.Template/commit/a11ffeb94f3f69328dc26b4ab326957c8274eef6) - minor adjustments to PR merge flow *(commit by [@myarichuk](https://github.com/myarichuk))*
@@ -31,3 +36,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v1.0.10.0]: https://github.com/myarichuk/Library.Template/compare/v1.0.9.0...v1.0.10.0
 [v1.0.23.0]: https://github.com/myarichuk/Library.Template/compare/v1.0.22.0...v1.0.23.0
 [v2.0.0.0]: https://github.com/myarichuk/Library.Template/compare/v1.0.23.0...v2.0.0.0
+[v2.0.1.0]: https://github.com/myarichuk/Library.Template/compare/v2.0.0.0...v2.0.1.0
