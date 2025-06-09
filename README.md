@@ -11,10 +11,26 @@ This is a template for a .Net library project. The main idea is to provide conve
 * [Pre-Commit](https://pre-commit.com/) configuration and scripts to install the tool and it's hooks
 * Scripts to install dependencies so development can be started quicker
 
+## Prerequisites
+
+* [.NET SDK](https://dotnet.microsoft.com/) as defined in `global.json`
+* PowerShell on Windows for running the helper scripts
+* [Python](https://www.python.org/) for installing and running `pre-commit`
+
 ## How to start development with this template?
 
-1. Create a GitHub repository with this project as it's tempalte
-2. Execute ``install-dependencies`` script (if on Windows execute PowerShell script, on Linux execute the Bash script). This will ensure there is correct .Net SDK installed, install dotnet-format tool and execute pre-commit install script
-3. In order for ``nuget.org`` deployment to work, create [NuGet API key](https://docs.microsoft.com/en-us/nuget/nuget-org/publish-a-package#create-api-keys) and set it in the repository ``secrets`` as ``NUGET_TOKEN``.
-4. Replace 'COMPANY-PLACEHOLDER' in ``stylecop.json`` to have a correct value
-5. Replace 'COMPANY-PLACEHOLDER' values in ``Directory.Build.props`` file to proper values
+1. Create a GitHub repository with this project as its template
+2. Run ``install-dependencies`` (`.ps1` on Windows or `.sh` on Linux). It installs the right .NET SDK, `dotnet-format` and sets up `pre-commit`
+3. Create a [NuGet API key](https://docs.microsoft.com/en-us/nuget/nuget-org/publish-a-package#create-api-keys) and set it in the repository ``secrets`` as ``NUGET_TOKEN``
+4. Replace `COMPANY-PLACEHOLDER` in ``stylecop.json`` with your company or project name
+5. Replace `COMPANY-PLACEHOLDER` values in ``Directory.Build.props`` with the same value
+6. If you use a different strong name key, update ``strongname.snk`` and ``AssemblyInfo.cs`` accordingly
+
+## Publishing a package manually
+
+For testing you may want to publish the package without waiting for the merge workflow. Pack and push the project manually:
+
+```bash
+dotnet pack -c Release
+dotnet nuget push "bin/Packages/Release/*.nupkg" -k <API_KEY> -s https://api.nuget.org/v3/index.json
+```
