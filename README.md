@@ -10,6 +10,7 @@ This is a template for a .Net library project. The main idea is to provide conve
 * Preconfigured [StyleCop](https://github.com/StyleCop/StyleCop) rules
 * [Pre-Commit](https://pre-commit.com/) configuration and scripts to install the tool and it's hooks
 * Scripts to install dependencies so development can be started quicker
+* Sample Guard utility class for validation
 
 ## Prerequisites
 
