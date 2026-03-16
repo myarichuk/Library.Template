@@ -22,9 +22,11 @@ This is a template for a .Net library project. The main idea is to provide conve
 
 1. Create a GitHub repository with this project as its template
 2. Run ``install-dependencies`` (`.ps1` on Windows or `.sh` on Linux). It installs the right .NET SDK, `dotnet-format` and sets up `pre-commit`
-3. Create a [NuGet API key](https://docs.microsoft.com/en-us/nuget/nuget-org/publish-a-package#create-api-keys) and set it in the repository ``secrets`` as ``NUGET_TOKEN``
-4. Replace `COMPANY-PLACEHOLDER` in ``stylecop.json`` with your company or project name
-5. Replace `COMPANY-PLACEHOLDER` values in ``Directory.Build.props`` with the same value
+3. Run the customization script to rename the project and set up placeholders:
+   - On Linux/macOS: `./customize.sh YourCompanyName YourProjectName`
+   - On Windows: `.\customize.ps1 -CompanyName YourCompanyName -ProjectName YourProjectName`
+4. Delete the customization scripts (`customize.sh`, `customize.ps1`) if you no longer need them.
+5. Set up [NuGet Trusted Publishing (OIDC)](https://learn.microsoft.com/en-us/nuget/nuget-org/oidc-publishing) in NuGet.org and GitHub. The workflow (`on-merge-pr.yml`) is already configured with `id-token: write` permissions, so no long-lived API secrets are required!
 6. If you use a different strong name key, update ``strongname.snk`` and ``AssemblyInfo.cs`` accordingly
 
 ## Publishing a package manually
